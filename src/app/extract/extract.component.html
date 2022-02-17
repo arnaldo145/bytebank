@@ -1,0 +1,23 @@
+<section class="container">
+  <h2 class="title">Transferências</h2>
+  <table class="table">
+    <thead class="table__header">
+      <th class="table__header__content">Data</th>
+      <th class="table__header__content">Valor</th>
+      <th class="table__header__content">Destino</th>
+    </thead>
+    <tbody *ngIf="transferOperations?.length > 0; else emptyList">
+      <tr class="table__line" *ngFor="let transferOperation of transferOperations">
+        <td class="table__content">
+          {{ transferOperation.date | date: "short" }}
+        </td>
+        <td class="table__content">{{ transferOperation.value | currency }}</td>
+        <td class="table__content">{{ transferOperation.destination }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #emptyList>
+    <p>Nenhuma operação cadastrada</p>
+  </ng-template>
+</section>
