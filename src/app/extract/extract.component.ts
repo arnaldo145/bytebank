@@ -1,5 +1,7 @@
-import { TransferService } from './../services/transfer.service';
 import { Component, OnInit } from '@angular/core';
+
+import { TransferService } from './../services/transfer.service';
+import { Transfer } from '../models/transfer.model';
 
 @Component({
   selector: 'app-extract',
@@ -12,6 +14,8 @@ export class ExtractComponent implements OnInit {
   constructor(private transferService: TransferService) {}
 
   ngOnInit(): void {
-    this.transferOperations = this.transferService.tranferOperations;
+    this.transferService.getAll().subscribe((tranferOperations: Transfer[]) => {
+      this.transferOperations = tranferOperations;
+    });
   }
 }
