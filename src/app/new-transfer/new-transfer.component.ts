@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Transfer } from '../models/transfer.model';
+import { TransferService } from '../services/transfer.service';
 
 @Component({
   selector: 'app-new-transfer',
@@ -11,14 +13,25 @@ export class NewTransferComponent {
   value: number;
   destination: number;
 
+  constructor(private transferService: TransferService) {}
+
   transfer() {
-    const valueToEmit: any = {
+    const valueToEmit: Transfer = {
       value: this.value,
       destination: this.destination,
     };
 
-    this.onTransfer.emit(valueToEmit);
-    this.cleanForm();
+    this.transferService.add(valueToEmit).subscribe(
+      (response: Transfer) => {
+        alert(
+          `Operação para conta ${response.destination} realizada com sucesso`
+        );
+        this.cleanForm();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   cleanForm() {
