@@ -11,7 +11,7 @@
         <td class="table__content">
           {{ transferOperation.date | date: "short" }}
         </td>
-        <td class="table__content">{{ transferOperation.value | currency }}</td>
+        <td class="table__content table__balance">{{ transferOperation.value | currency }}</td>
         <td class="table__content">{{ transferOperation.destination }}</td>
       </tr>
     </tbody>

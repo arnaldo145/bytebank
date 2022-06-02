@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Transfer } from '../models/transfer.model';
 import { TransferService } from '../services/transfer.service';
 
@@ -13,7 +14,8 @@ export class NewTransferComponent {
   value: number;
   destination: number;
 
-  constructor(private transferService: TransferService) {}
+  constructor(private transferService: TransferService,
+    private router: Router,) {}
 
   transfer() {
     const valueToEmit: Transfer = {
@@ -23,19 +25,11 @@ export class NewTransferComponent {
 
     this.transferService.add(valueToEmit).subscribe(
       (response: Transfer) => {
-        alert(
-          `Operação para conta ${response.destination} realizada com sucesso`
-        );
-        this.cleanForm();
+        this.router.navigateByUrl('extract');
       },
       (error) => {
         console.error(error);
       }
     );
-  }
-
-  cleanForm() {
-    this.value = 0;
-    this.destination = 0;
   }
 }

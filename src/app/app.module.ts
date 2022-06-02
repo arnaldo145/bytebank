@@ -8,11 +8,12 @@ import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NewTransferComponent } from './new-transfer/new-transfer.component';
 import { ExtractComponent } from './extract/extract.component';
+import { AppRoutingModule } from './app-routing.module';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
   declarations: [AppComponent, NewTransferComponent, ExtractComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [ { provide: LOCALE_ID, useValue: 'pt' },
   {
     provide: DEFAULT_CURRENCY_CODE,
